@@ -235,7 +235,10 @@ class Data {
 
     getListSearchText(value) {
         return  this.storage.filter(item => {
-            return item.name.indexOf(value) !== -1 || item.region.indexOf(value) !== -1 || item.capital.indexOf(value) !== -1
+            value = value.toLowerCase();
+            return item.name.toLowerCase().indexOf(value) !== -1 ||
+                item.region.toLowerCase().indexOf(value) !== -1 ||
+                item.capital.toLowerCase().indexOf(value) !== -1
         }).map(this.mapList);
     }
 
