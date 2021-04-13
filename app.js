@@ -40,10 +40,10 @@ class MainView extends View {
     changeSelect(value) {
         this.searchView.setText('');
 
-        if (value !== '-') {
-            this.tableView.data = this.dataModel.getListByRegion(value);
-        } else {
+        if (value === '-') {
             this.tableView.data = this.dataModel.getList();
+        } else {
+            this.tableView.data = this.dataModel.getListByRegion(value);
         }
 
         this.tableView.render();
@@ -52,10 +52,10 @@ class MainView extends View {
     changeSearchText(text) {
         this.selectView.setSelect('-');
         text = text.trim();
-        if (text !== '') {
-            this.tableView.data = this.dataModel.getListSearchText(text);
-        } else {
+        if (text === '') {
             this.tableView.data = this.dataModel.getList();
+        } else {
+            this.tableView.data = this.dataModel.getListSearchText(text);
         }
 
         this.tableView.render();
@@ -96,9 +96,9 @@ class MainView extends View {
 }
 
 class SearchView extends View {
-    constructor(el, cbChange) {
+    constructor(el, cbKeyup) {
         super(el);
-        this.cbKeyup = cbChange;
+        this.cbKeyup = cbKeyup;
     }
 
     template(vars) {
@@ -117,7 +117,7 @@ class SearchView extends View {
     }
 
     setEvents() {
-        this.$.find('#inputSearch').keyup(el => {this.cbKeyup(el.target.value)});
+        this.$.find('#inputSearch').keyup(el => { this.cbKeyup(el.target.value) });
     }
 
     render() {
@@ -139,10 +139,10 @@ class SelectView extends View {
                 <label for="selectSearch" class="col-sm-2 col-form-label">Search</label>
                 <div class="col-sm-10">
                     <select class="form-select">
-                      <option selected>-</option>
-                      <% for (item in this.options) {%>
-                        <option value="<%= item%>"><%= this.options[item]%></option>
-                      <%}%>
+                        <option selected>-</option>
+                            <% for (let item in this.options) {%>
+                                <option value="<%= item%>"><%= this.options[item]%></option>
+                            <%}%>
                     </select>
                 </div>
             </div>
@@ -230,11 +230,11 @@ class Data {
     }
 
     getListByRegion(region) {
-       return  this.storage.filter(item => item.region === region).map(this.mapList);
+       return this.storage.filter(item => item.region === region).map(this.mapList);
     }
 
     getListSearchText(value) {
-        return  this.storage.filter(item => {
+        return this.storage.filter(item => {
             value = value.toLowerCase();
             return item.name.toLowerCase().indexOf(value) !== -1 ||
                 item.region.toLowerCase().indexOf(value) !== -1 ||
