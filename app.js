@@ -136,7 +136,7 @@ class SelectView extends View {
     template(vars) {
         return super.template(`
             <div class="row">
-                <label for="selectSearch" class="col-sm-2 col-form-label">Search</label>
+                <label for="selectSearch" class="col-sm-2 col-form-label">Region</label>
                 <div class="col-sm-10">
                     <select class="form-select">
                         <option selected>-</option>
