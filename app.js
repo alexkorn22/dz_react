@@ -85,7 +85,7 @@ class MainView extends View {
         this.$.html(this.template());
         this.searchView = new SearchView(this.$.find('[data-search-wrap]')[0], this.changeSearchText.bind(this));
         this.selectView = new SelectView(this.$.find('[data-select-wrap]')[0], this.dataModel.getRegions(), this.changeSelect.bind(this));
-        this.tableView = new TableView(this.dataModel.getList(), this.$.find('[data-table-wrap]')[0]);
+        this.tableView = new TableView(this.$.find('[data-table-wrap]')[0], this.dataModel.getList());
 
         this.searchView.render();
         this.selectView.render();
@@ -166,7 +166,7 @@ class SelectView extends View {
 }
 
 class TableView extends View {
-    constructor(data, el) {
+    constructor(el, data) {
         super(el);
         this.data = data;
     }
@@ -245,7 +245,7 @@ class Data {
     getRegions() {
         let regions = {};
         for (let value of this.storage) {
-            regions[value.region] = value.region;
+            regions[value.region] = value.region ? value.region : 'No region';
         }
         return regions;
     }
