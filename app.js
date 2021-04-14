@@ -252,17 +252,15 @@ class Data {
 }
 
 $(document).ready(() => {
-    $.ajax({
-        url: "https://restcountries.eu/rest/v2/all",
-        success: function (response) {
-            $('.lds-ring').hide();
-            new MainView(
-                document.getElementById('app'),
-                new Data(response)
-            );
+    var player = null;
+    AceStream.createPlayer("#player", {
+        onLoad: function (playerObj) {
+            player = playerObj;
+            // Sintel
+            player.loadContentId("78637dab85e7948057165ad0c80b3db475dd9c3d");
         },
-        error: function (e) {
-            console.error(e);
+        onError: function(err) {
+            console.log("init: error: " + err);
         }
     });
 })
