@@ -2,7 +2,7 @@ import React from "react";
 import TableRow from "./TableRow";
 
 function Table(props) {
-    let rows = this.props.countries.map(country => {
+    let rows = props.countries.map(country => {
         return <tr key={country.code}><TableRow country={country} /></tr>
     });
 
