@@ -1,0 +1,7 @@
+.Product {
+  cursor: pointer;
+  padding: 5px;
+}
+.Product:hover {
+  padding: 0;
+}
