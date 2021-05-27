@@ -1,8 +1,31 @@
 import React from "react";
-import './Cart.css'
+import CartList from "./CartList";
+import {OverlayTrigger, Popover, Button } from 'react-bootstrap';
 
-//https://www.nicesnippets.com/snippet/bootstrap-4-shopping-cart-dropdown-in-header
+export default function Cart({cart, removeFromCart, addCartCount, removeCartCount, show}) {
+    let cartList = <CartList
+        cart={cart}
+        removeFromCart={removeFromCart}
+        addCartCount={addCartCount}
+        removeCartCount={removeCartCount}
+    />
 
-export default function Cart() {
-    return 'Cart'
+    const popover = (
+        <Popover id="popover-cart" style={{minWidth: '500px'}}>
+            <Popover.Title as="h3">Корзина</Popover.Title>
+            <Popover.Content>
+                {cartList}
+            </Popover.Content>
+        </Popover>
+    );
+
+    return <OverlayTrigger
+        show={show}
+        trigger="click"
+        placement="bottom"
+        overlay={popover}
+        rootClose={true}
+    >
+        <Button variant="success">Корзина ({ cart.length })</Button>
+    </OverlayTrigger>
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Product from "./Product";
 
-export default function ProductList() {
+export default function ProductList({cart, addToCart}) {
 
     let [products, setProducts] = useState([]);
 
@@ -13,8 +13,14 @@ export default function ProductList() {
     }, []);
 
     let items = products.map(item => <div className="col-md-3" key={item.id}>
-        <Product item={item}/>
+        <Product
+            item={item}
+            onAddProduct={() => {addToCart(item)}}
+            cart={cart}
+        />
     </div>)
+
+
 
     return <div className="ProductList">
         <div className="row">

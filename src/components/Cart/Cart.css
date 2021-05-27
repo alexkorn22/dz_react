@@ -1,0 +1,15 @@
+.cartItem .cartItem__count {
+    font-size: 1.3em;
+}
+.cartItem .cartItem__warpCount {
+    display: flex;
+    justify-content: space-evenly;
+}
+.total .total__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total .total__row.total__row_withMargin {
+    margin: 5px 0;
+}
