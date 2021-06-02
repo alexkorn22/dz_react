@@ -19,7 +19,7 @@ export default function Product({ item: {name, img, description, id, price}, onA
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{ description }</p>
-                <p className="card-text">Цена <b>{ price }</b></p>
+                <p className="card-text">Цена <b>{ price.toFixed(2) }</b></p>
                 {btn}
             </div>
         </div>
