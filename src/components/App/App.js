@@ -9,7 +9,6 @@ import {
     Route
 } from "react-router-dom";
 import Order from "../Order/Order";
-import Footer from "./Footer";
 import './App.css'
 
 export default function App() {
