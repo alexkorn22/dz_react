@@ -92,7 +92,6 @@ export default function App() {
                     </Route>
                 </Switch>
             </div>
-            <Footer />
         </Router>
     </>;
 }
