@@ -3,6 +3,14 @@ import React, {useState} from "react";
 import ProductList from "../ProductList/ProductList";
 import Header from "./Header";
 import Cart from "../Cart/Cart";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import Order from "../Order/Order";
+import Footer from "./Footer";
+import './App.css'
 
 export default function App() {
 
@@ -62,11 +70,29 @@ export default function App() {
     />;
 
     return <>
-        <Header>
-            { cartComponent }
-        </Header>
-        <div className="container mt-5">
-            <ProductList addToCart={addToCart} cart={cart}/>
-        </div>
+        <Router>
+            <Header>
+                { cartComponent }
+            </Header>
+            <div className="main container">
+                <Switch>
+                    <Route path="/about">
+                        About
+                    </Route>
+                    <Route path="/order">
+                        <Order
+                            cart={cart}
+                            removeFromCart={removeFromCart}
+                            addCartCount={addCartCount}
+                            removeCartCount={removeCartCount}
+                        />
+                    </Route>
+                    <Route path="/">
+                        <ProductList addToCart={addToCart} cart={cart}/>
+                    </Route>
+                </Switch>
+            </div>
+            <Footer />
+        </Router>
     </>;
 }

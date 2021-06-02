@@ -1,6 +1,7 @@
 import React from "react";
 import CartList from "./CartList";
 import {OverlayTrigger, Popover, Button } from 'react-bootstrap';
+import {Link} from "react-router-dom";
 
 export default function Cart({cart, removeFromCart, addCartCount, removeCartCount, show}) {
     let cartList = <CartList
@@ -15,6 +16,7 @@ export default function Cart({cart, removeFromCart, addCartCount, removeCartCoun
             <Popover.Title as="h3">Корзина</Popover.Title>
             <Popover.Content>
                 {cartList}
+                <Link to={'/order'} className='btn btn-success'>Оформить заказ</Link>
             </Popover.Content>
         </Popover>
     );
