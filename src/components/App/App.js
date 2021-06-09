@@ -7,7 +7,7 @@ export default function App() {
     const nickNameRef = useRef();
     const genderRef = useRef();
 
-    const [age, setAge] = useState(2);
+    const [age, setAge] = useState(0);
 
     const submitForm = (e) => {
         e.preventDefault();
