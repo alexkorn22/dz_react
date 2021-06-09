@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Order from "../Order/Order";
 import './App.css'
+import {getCities} from "../../services/GeoApi";
 
 export default function App() {
 
