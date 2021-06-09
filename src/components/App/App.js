@@ -1,97 +1,47 @@
 // eslint-disable-next-line
-import React, {useState} from "react";
-import ProductList from "../ProductList/ProductList";
-import Header from "./Header";
-import Cart from "../Cart/Cart";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
-import Order from "../Order/Order";
+import React, {useRef, useState} from "react";
 import './App.css'
-import {getCities} from "../../services/GeoApi";
 
 export default function App() {
 
-    let [cart, setCart] = useState([]);
+    const nickNameRef = useRef();
+    const genderRef = useRef();
 
-    let addToCart = product => {
-        cart = [...cart];
-        let find = cart.filter(item => item.productId === product.id);
-        if (!find.length) {
-            setCart([...cart, {
-                count: 1,
-                productId: product.id,
-                name: product.name,
-                price: product.price,
-            }]);
-            return;
-        }
+    const [age, setAge] = useState(2);
 
-        let item = find[0];
-        item.count++;
-        setCart(cart);
+    const submitForm = (e) => {
+        e.preventDefault();
+        console.log(nickNameRef.current.value);
+        console.log(age);
+        console.log(genderRef.current.value);
     }
 
-    let addCartCount = productId => {
-        cart = [...cart];
-        let find = cart.filter(item => item.productId === productId);
-        if (!find.length) {
-            return;
-        }
-
-        let item = find[0];
-        item.count++;
-        setCart(cart);
+    const onChangeAge = e => {
+        setAge(e.target.value);
     }
 
-    let removeCartCount = productId => {
-        cart = [...cart];
-        let find = cart.filter(item => item.productId === productId);
-        if (!find.length) {
-            return;
-        }
-
-        let item = find[0];
-        item.count--;
-        setCart(cart);
-    }
-
-    let removeFromCart = productId => {
-        setCart(cart.filter(item => item.productId !== productId))
-    }
-
-    let cartComponent = <Cart
-        cart={cart}
-        removeFromCart={removeFromCart}
-        addCartCount={addCartCount}
-        removeCartCount={removeCartCount}
-    />;
-
-    return <>
-        <Router>
-            <Header>
-                { cartComponent }
-            </Header>
-            <div className="main container">
-                <Switch>
-                    <Route path="/about">
-                        About
-                    </Route>
-                    <Route path="/order">
-                        <Order
-                            cart={cart}
-                            removeFromCart={removeFromCart}
-                            addCartCount={addCartCount}
-                            removeCartCount={removeCartCount}
-                        />
-                    </Route>
-                    <Route path="/">
-                        <ProductList addToCart={addToCart} cart={cart}/>
-                    </Route>
-                </Switch>
+    return <div className='container mt-3'>
+        <form onSubmit={submitForm}>
+            <div className="form-group">
+                <label>Nickname</label>
+                <input type="text" className="form-control" ref={nickNameRef}/>
             </div>
-        </Router>
-    </>;
+            <div className="form-group">
+                <label>Age</label>
+                <input type="number" className="form-control" value={age} onChange={onChangeAge}/>
+            </div>
+
+            <div className="form-group">
+                <label>Gender</label>
+                <select className="custom-select" ref={genderRef}>
+                    <option>-</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+    </div>
 }
