@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Product from "./Product";
+import {getProducts} from "../../services/ProductApi";
 
 export default function ProductList({cart, addToCart}) {
 
     let [products, setProducts] = useState(null);
 
     useEffect(() => {
-        let url = 'https://script.google.com/macros/s/AKfycbyUxf43FMa-RzU_CynnV9AltB9VMuifTR9HSgJQmpeR7u7PSyYRMQCMQaz2ySo-9AZE/exec';
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setProducts(data.data))
+        getProducts().then(data => setProducts(data.data))
     }, []);
 
     if (products === null) {

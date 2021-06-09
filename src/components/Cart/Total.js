@@ -11,10 +11,6 @@ export default function Total({cart}) {
         setSum(sum);
     }, [cart])
 
-    // Почему нельзя так?
-    //let sum = 0;
-    //cart.map(item => sum += item.price * item.count);
-
     return <div className={'total'}>
         <div className={'total__row total__row_withMargin'}>
             <b>Количество</b>
